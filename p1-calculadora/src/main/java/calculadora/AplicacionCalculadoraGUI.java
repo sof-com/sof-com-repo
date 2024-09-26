@@ -6,7 +6,7 @@ package calculadora;
 public class AplicacionCalculadoraGUI {
 
 	/** Este es el método inicial de la aplicación. En él basta con instanciar CalculadoraGUI
-	 * pasándole una instancia de una clase que implementa OperacionesCalculadoraGUI.
+	 * pasándole una instancia de una clase que implementa AdaptadorOperacionesCalculadoraGUI.
 	 * @param args Argumentos del método main()
 	 */
 	public static void main(String[] args) {
