@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.upm.dte.softcom</groupId>
+  <artifactId>p1-calculadora</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>es.upm.dte.softcom.CalculadoraGUI</groupId>
+      <artifactId>calculadora-gui</artifactId>
+      <version>7.0.0</version>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <id>sof-com-mvn-repo</id>
+      <name>GitHub SOFCOM Maven Packages</name>
+      <url>https://raw.githubusercontent.com/sof-com/sof-com-maven-repo/main</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+</project>
