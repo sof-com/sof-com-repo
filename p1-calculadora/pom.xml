@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.upm.dte.softcom</groupId>
+	<artifactId>p1-calculadora</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Este es el proyecto para construir la calculadora monolítica de la práctica 1</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>25</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+	</properties>
+	<dependencies>
+		<!-- Dependencia para paquete CalculadoraGUI -->
+		<dependency>
+			<groupId>es.upm.dte.softcom.CalculadoraGUI</groupId>
+			<artifactId>calculadora-gui</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.upm.dte.softcom.CalculadoraGUI</groupId>
+			<artifactId>calculadora-gui</artifactId>
+			<version>8.0.0</version>
+			<classifier>javadoc</classifier>
+			<type>jar</type>
+		</dependency>
+		<!-- Dependencia para pruebas unitarias JUnit 5 (Jupiter) -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.9.3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build></build>
+	<repositories>
+		<repository>
+			<id>sof-com-mvn-repo</id>
+			<name>GitHub SOFCOM Maven Packages</name>
+			<url>https://raw.githubusercontent.com/sof-com/sof-com-maven-repo/main</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+</project>
