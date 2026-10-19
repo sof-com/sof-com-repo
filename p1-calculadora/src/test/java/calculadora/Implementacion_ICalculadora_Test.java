@@ -3,6 +3,12 @@
  * Curso 2026/2027
  * Práctica 1
  * Archivo: Implementacion_ICalculadora_Test.java
+ * Versión: 1.0
+ */
+
+/* Changelog:
+ * 1.0 - 2026-09-28 - Versión inicial.
+ * 1.1 - 2026-10-19 - Orden estricto de dos tests a ejecutar.
  */
 
 package calculadora;
@@ -12,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Order;
 
 import calculadoraGUI.ICalculadora;
 
@@ -19,6 +28,7 @@ import calculadoraGUI.ICalculadora;
  * Prueba todas las operaciones aritméticas, raíz cuadrada, excepciones,
  * último resultado y memoria acumuladora.
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Implementacion_ICalculadora_Test {
 
     private ICalculadora ops;
@@ -29,9 +39,35 @@ public class Implementacion_ICalculadora_Test {
     }
 
     @Test
+    @Order(1)
     public void testInitialURAndMemoryZero() {
         assertEquals(0.0, ops.obtenerUltimoResultado(), 1e-9, "UR debe ser 0 antes de operaciones");
         assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe ser 0 antes de operaciones");
+    }
+
+    @Test
+    @Order(2)
+    public void testMemoryOperations() throws Exception {
+        // memoria inicialmente 0
+        assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor 0 antes de cualquier operación");
+
+        // ML pone memoria a 0 (aunque ya es 0)
+        ops.memoriaLimpiar();
+        assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor 0 despúes de ser limpiada");
+
+        // realizar una operación y añadir a memoria
+        double r1 = ops.sumar(1.0, 2.0); // r1 = 3.0
+        ops.memoriaAniadir(); // mem += ur (3.0)
+        assertEquals(r1, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor del último resultado ene ste caso.");
+
+        // otra operación y añadir de nuevo
+        double r2 = ops.multiplicar(5.0, 2.0); // r2 = 10.0
+        ops.memoriaAniadir(); // mem = 3.0 + 10.0 = 13.0
+        assertEquals(r1 + r2, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener la suma del valor anterior y el último resultado en este caso.");
+
+        // limpiar memoria
+        ops.memoriaLimpiar();
+        assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor 0 despúes de ser limpiada");
     }
 
     @Test
@@ -87,29 +123,5 @@ public class Implementacion_ICalculadora_Test {
     public void testSqrtNegativeThrows() {
         Exception e = assertThrows(Exception.class, () -> ops.raizCuadrada(-4.0));
         assertEquals("Raíz de número negativo", e.getMessage(), "Cuando se intenta obtener la raíz cuadrada de un número negativo, debe arrojar Exception con mensaje 'Raíz de número negativo'");
-    }
-
-    @Test
-    public void testMemoryOperations() throws Exception {
-        // memoria inicialmente 0
-        assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor 0 antes de cualquier operación");
-
-        // ML pone memoria a 0 (aunque ya es 0)
-        ops.memoriaLimpiar();
-        assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor 0 despúes de ser limpiada");
-
-        // realizar una operación y añadir a memoria
-        double r1 = ops.sumar(1.0, 2.0); // r1 = 3.0
-        ops.memoriaAniadir(); // mem += ur (3.0)
-        assertEquals(r1, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor del último resultado ene ste caso.");
-
-        // otra operación y añadir de nuevo
-        double r2 = ops.multiplicar(5.0, 2.0); // r2 = 10.0
-        ops.memoriaAniadir(); // mem = 3.0 + 10.0 = 13.0
-        assertEquals(r1 + r2, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener la suma del valor anterior y el último resultado en este caso.");
-
-        // limpiar memoria
-        ops.memoriaLimpiar();
-        assertEquals(0.0, ops.memoriaObtener(), 1e-9, "La memoria acumuladora debe contener el valor 0 despúes de ser limpiada");
     }
 }
